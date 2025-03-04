@@ -1,0 +1,18 @@
+<!-- templates/projects/search.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Search Results for "{{ query }}"</h2>
+<h3>Projects</h3>
+<ul class="list-group mb-4">
+    {% for project in projects %}
+        <li class="list-group-item"><a href="{% url 'project_detail' project.id %}">{{ project.title }}</a></li>
+    {% endfor %}
+</ul>
+<h3>Tasks</h3>
+<ul class="list-group">
+    {% for task in tasks %}
+        <li class="list-group-item">{{ task.title }} in <a href="{% url 'project_detail' task.project.id %}">{{ task.project.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

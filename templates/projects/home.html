@@ -1,0 +1,22 @@
+<!-- templates/projects/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Owned Projects</h2>
+<ul class="list-group mb-4">
+    {% for project in owned_projects %}
+        <li class="list-group-item"><a href="{% url 'project_detail' project.id %}">{{ project.title }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'project_create' %}" class="btn btn-primary">Create New Project</a>
+
+<h2>Tasks Assigned to You</h2>
+<ul class="list-group">
+    {% for task in assigned_tasks %}
+        <li class="list-group-item">
+            {{ task.title }} in <a href="{% url 'project_detail' task.project.id %}">{{ task.project.title }}</a>
+            - Due: {{ task.due_date }} - Completed: {{ task.completed|yesno:"Yes,No" }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
